@@ -1,12 +1,13 @@
-import { useState } from "react";
+import {useState} from "react";
+import Box from "@mui/material/Box";
+import IconButton from "@mui/material/IconButton";
+import InputBase, from "@mui/material/InputBase";
+import Typography, from "@mui/material/Typography";
+import Select, from "@mui/material/Select";
+import MenuItem, from "@mui/material/MenuItem";
+import FormControl, from "@mui/material/FormControl";
+
 import {
-    Box,
-    IconButton,
-    InputBase,
-    Typography,
-    Select,
-    MenuItem,
-    FormControl,
     useTheme,
     useMediaQuery,
 } from "@mui/material";
@@ -20,9 +21,9 @@ import {
     Menu,
     Close,
 } from "@mui/icons-material";
-import { useDispatch, useSelector } from "react-redux";
-import { setMode, setLogout } from "state";
-import { useNavigate } from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {setMode, setLogout} from "state";
+import {useNavigate} from "react-router-dom";
 import FlexBetween from "components/FlexBetween";
 
 const Navbar = () => {
@@ -65,9 +66,9 @@ const Navbar = () => {
                         gap="3rem"
                         padding="0.1rem 1.5rem"
                     >
-                        <InputBase placeholder="Search..." />
+                        <InputBase placeholder="Search..."/>
                         <IconButton>
-                            <Search />
+                            <Search/>
                         </IconButton>
                     </FlexBetween>
                 )}
@@ -78,14 +79,14 @@ const Navbar = () => {
                 <FlexBetween gap="2rem">
                     <IconButton onClick={() => dispatch(setMode())}>
                         {theme.palette.mode === "dark" ? (
-                            <DarkMode sx={{ fontSize: "25px" }} />
+                            <DarkMode sx={{fontSize: "25px"}}/>
                         ) : (
-                            <LightMode sx={{ color: dark, fontSize: "25px" }} />
+                            <LightMode sx={{color: dark, fontSize: "25px"}}/>
                         )}
                     </IconButton>
-                    <Message sx={{ fontSize: "25px" }} />
-                    <Notifications sx={{ fontSize: "25px" }} />
-                    <Help sx={{ fontSize: "25px" }} />
+                    <Message sx={{fontSize: "25px"}}/>
+                    <Notifications sx={{fontSize: "25px"}}/>
+                    <Help sx={{fontSize: "25px"}}/>
                     <FormControl variant="standard" value={fullName}>
                         <Select
                             value={fullName}
@@ -102,7 +103,7 @@ const Navbar = () => {
                                     backgroundColor: neutralLight,
                                 },
                             }}
-                            input={<InputBase />}
+                            input={<InputBase/>}
                         >
                             <MenuItem value={fullName}>
                                 <Typography>{fullName}</Typography>
@@ -115,7 +116,7 @@ const Navbar = () => {
                 <IconButton
                     onClick={() => setIsMobileMenuToggled(!isMobileMenuToggled)}
                 >
-                    <Menu />
+                    <Menu/>
                 </IconButton>
             )}
 
@@ -136,7 +137,7 @@ const Navbar = () => {
                         <IconButton
                             onClick={() => setIsMobileMenuToggled(!isMobileMenuToggled)}
                         >
-                            <Close />
+                            <Close/>
                         </IconButton>
                     </Box>
 
@@ -150,17 +151,17 @@ const Navbar = () => {
                     >
                         <IconButton
                             onClick={() => dispatch(setMode())}
-                            sx={{ fontSize: "25px" }}
+                            sx={{fontSize: "25px"}}
                         >
                             {theme.palette.mode === "dark" ? (
-                                <DarkMode sx={{ fontSize: "25px" }} />
+                                <DarkMode sx={{fontSize: "25px"}}/>
                             ) : (
-                                <LightMode sx={{ color: dark, fontSize: "25px" }} />
+                                <LightMode sx={{color: dark, fontSize: "25px"}}/>
                             )}
                         </IconButton>
-                        <Message sx={{ fontSize: "25px" }} />
-                        <Notifications sx={{ fontSize: "25px" }} />
-                        <Help sx={{ fontSize: "25px" }} />
+                        <Message sx={{fontSize: "25px"}}/>
+                        <Notifications sx={{fontSize: "25px"}}/>
+                        <Help sx={{fontSize: "25px"}}/>
                         <FormControl variant="standard" value={fullName}>
                             <Select
                                 value={fullName}
@@ -177,7 +178,7 @@ const Navbar = () => {
                                         backgroundColor: neutralLight,
                                     },
                                 }}
-                                input={<InputBase />}
+                                input={<InputBase/>}
                             >
                                 <MenuItem value={fullName}>
                                     <Typography>{fullName}</Typography>
