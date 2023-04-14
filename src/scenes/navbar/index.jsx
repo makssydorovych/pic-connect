@@ -93,11 +93,16 @@ const Navbar = () => {
                 }}
                         input = {<InputBase/>}
                 >
-                    <MenuItem value={fullName}></MenuItem>
+                    <MenuItem value={fullName}>
+                        <Typography>{fullName}</Typography>
+                    </MenuItem>
+                    <MenuItem onClick={()=>dispatch(setLogout())}>Log out</MenuItem>
                 </Select>
             </FormControl>
             </FlexBetween>)
-            : (<IconButton></IconButton>)}
+            : (<IconButton onClick={()=>setIsMobileMenuToggled(!isMobileMenuToggled)}>
+                <Menu/>
+            </IconButton>)}
     </FlexBetween>
 };
 
