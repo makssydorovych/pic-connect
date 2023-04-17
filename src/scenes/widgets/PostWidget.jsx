@@ -25,16 +25,11 @@ const PostWidget = ({
                         comments,
                     }) => {
     const [isComments, setIsComments] = useState(false);
-
     const dispatch = useDispatch();
     const token = useSelector((state) => state.token);
     const loggedInUserId = useSelector((state) => state.user._id);
-    const [isLiked, setIsLiked] = useState(
-        Array.isArray(likes) && likes.find((like) => like._id === loggedInUserId)
-    );
-    const [likeCount, setLikeCount] = useState(
-        likes ? Object.keys(likes).length : 0
-    );
+    const isLiked = Boolean(likes[loggedInUserId]);
+    const likeCount = Object.keys(likes).length;
 
     const { palette } = useTheme();
     const main = palette.neutral.main;
@@ -49,22 +44,9 @@ const PostWidget = ({
             },
             body: JSON.stringify({ userId: loggedInUserId }),
         });
-
         const updatedPost = await response.json();
-
-        await dispatch(setPost({ post: updatedPost }));
-
-        // Update likes and likeCount variables with the updated post data
-        const updatedLikes = updatedPost.likes;
-        const updatedLikeCount = updatedLikes
-            ? Object.keys(updatedLikes).length
-            : likes.length;
-
-        setIsLiked(Boolean(updatedLikes[loggedInUserId]));
-        setLikeCount(updatedLikeCount);
+        dispatch(setPost({ post: updatedPost }));
     };
-
-
 
     return (
         <WidgetWrapper m="2rem 0">
@@ -89,13 +71,12 @@ const PostWidget = ({
             <FlexBetween mt="0.25rem">
                 <FlexBetween gap="1rem">
                     <FlexBetween gap="0.3rem">
-                        <IconButton onClick={patchLike} style={{ border: "none", background: "none", padding: 0 }}>
+                        <IconButton onClick={patchLike}>
                             {isLiked ? (
                                 <FavoriteOutlined sx={{ color: primary }} />
                             ) : (
                                 <FavoriteBorderOutlined />
                             )}
-                            <Typography>{isLiked ? "Unlike" : "Like"}</Typography>
                         </IconButton>
                         <Typography>{likeCount}</Typography>
                     </FlexBetween>
