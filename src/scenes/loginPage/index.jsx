@@ -2,6 +2,7 @@ import React from 'react';
 import {useMediaQuery, useTheme} from "@mui/material";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import Form from "./Form";
 
 const LoginPage = () => {
     const theme = useTheme();
@@ -25,6 +26,7 @@ const LoginPage = () => {
             <Typography fontWeight="500" variant="h5" sx={{mb: "1.5rem"}}>
                 Welcome to PIC-CONNECT, social media for share pictures.
             </Typography>
+            <Form/>
         </Box>
     </Box>
 };
