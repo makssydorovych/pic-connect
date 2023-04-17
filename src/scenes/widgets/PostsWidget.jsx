@@ -15,12 +15,12 @@ const PostsWidget = ({ userId, isProfile = false }) => {
         });
         const data = await response.json();
         dispatch(setPosts({ posts: data }));
-        console.log(data)
+
     };
 
     const getUserPosts = async () => {
         const response = await fetch(
-            `${baseUrl}/${userId}/posts`,
+            `${baseUrl}/posts/${userId}/posts`,
             {
                 method: "GET",
                 headers: { Authorization: `Bearer ${token}` },
@@ -42,6 +42,7 @@ const PostsWidget = ({ userId, isProfile = false }) => {
     return (
         <>
             {posts.map(
+
                 ({
                      _id,
                      userId,
