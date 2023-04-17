@@ -15,11 +15,12 @@ const PostsWidget = ({ userId, isProfile = false }) => {
         });
         const data = await response.json();
         dispatch(setPosts({ posts: data }));
+        console.log(data)
     };
 
     const getUserPosts = async () => {
         const response = await fetch(
-            `http://localhost:8080/posts/${userId}/posts`,
+            `${baseUrl}/${userId}/posts`,
             {
                 method: "GET",
                 headers: { Authorization: `Bearer ${token}` },
@@ -27,6 +28,7 @@ const PostsWidget = ({ userId, isProfile = false }) => {
         );
         const data = await response.json();
         dispatch(setPosts({ posts: data }));
+        console.log(data)
     };
 
     useEffect(() => {
