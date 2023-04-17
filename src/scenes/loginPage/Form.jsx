@@ -10,7 +10,7 @@ import {Formik} from "formik";
 import * as yup from "yup";
 import {useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
-import {setLogin} from "state";
+import {setLogin, setLogout} from "state";
 import Dropzone from "react-dropzone";
 import FlexBetween from "components/FlexBetween";
 
@@ -66,6 +66,27 @@ const Form = () => {
         onSubmitProps.resetForm();
         if(savedUser){
             setPageType("login");
+        }
+    }
+    const login = async (values, onSubmitProps)=>{
+        const loggedInResponce = await fetch(
+            "http://localhost:3001/auth/login",
+            {
+                method: "POST",
+                headers: {"Content-Type":"application/json"},
+                body: JSON.stringify(values),
+            }
+        );
+        const loggedIn = await loggedInResponce.json();
+        onSubmitProps.resetForm();
+        if(loggedIn){
+            dispatch(
+                setLogin({
+                    user: loggedIn.user,
+                    token: loggedIn.token,
+                })
+            );
+            navigate("/home");
         }
     }
 
