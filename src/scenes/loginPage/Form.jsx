@@ -49,7 +49,29 @@ const Form = () => {
     const isLogin = pageType === "login";
     const isRegister = pageType === "register";
 
+    const register = async (values, onSubmitProps) =>{
+        const formData = new FormData();
+        for(let value in values){
+            formData.append(value, values[value])
+        }
+        formData.append('PicturePath', values.picture.name);
+        const savedUserResponce = await fetch(
+            "http://localhost:3001/auth/register",
+            {
+                method: "POST",
+                body: formData,
+            }
+        );
+        const saveUser = await savedUserResponce.json();
+        onSubmitProps.resetForm();
+        if(savedUser){
+            setPageType("login");
+        }
+    }
+
     const handleFormSubmit = async (values, onSubmitProps) => {
+        if(isLogin) await login(values, onSubmitProps);
+        if(isRegister) await register(values, onSubmitProps);
     };
 
     return (
