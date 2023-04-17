@@ -1,4 +1,4 @@
-import {createSlice} from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     mode: "light",
@@ -6,7 +6,8 @@ const initialState = {
     token: null,
     posts: [],
 };
-const authSlice = createSlice({
+
+export const authSlice = createSlice({
     name: "auth",
     initialState,
     reducers: {
@@ -24,18 +25,23 @@ const authSlice = createSlice({
         setFriends: (state, action) => {
             if (state.user) {
                 state.user.friends = action.payload.friends;
+            } else {
+                console.error("user friends non-existent :(");
             }
         },
         setPosts: (state, action) => {
             state.posts = action.payload.posts;
         },
         setPost: (state, action) => {
-            return state.posts.map((post) => {
-                if (post._id === action.payload.post_id) return action.payload.post;
+            const updatedPosts = state.posts.map((post) => {
+                if (post._id === action.payload.post._id) return action.payload.post;
                 return post;
             });
-        }
-    }
-})
-export const {setMode, setLogin, setLogout, setFriends, setPosts, setPost} = authSlice.actions;
+            state.posts = updatedPosts;
+        },
+    },
+});
+
+export const { setMode, setLogin, setLogout, setFriends, setPosts, setPost } =
+    authSlice.actions;
 export default authSlice.reducer;
