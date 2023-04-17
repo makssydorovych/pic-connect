@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 
 import twitter from "../../assets/twitter.png"
 import linkedIn from "../../assets/linkedin.png"
+import baseUrl from "../../api/url";
 
 const UserWidget = ({ userId, picturePath }) => {
     const [user, setUser] = useState(null);
@@ -25,7 +26,7 @@ const UserWidget = ({ userId, picturePath }) => {
     const main = palette.neutral.main;
 
     const getUser = async () => {
-        const response = await fetch(`http://localhost:8080/users/${userId}`, {
+        const response = await fetch(`${baseUrl}/users/${userId}`, {
             method: "GET",
             headers: { Authorization: `Bearer ${token}` },
         });
